@@ -1,0 +1,29 @@
+1.db.collection.insertMany()
+
+2.db.collection.insertOne()
+
+3.db.createCollection()
+
+4.db or show dbs
+
+5.use <database>
+
+6.db.collection.find().pretty()
+
+7.typeof <value>
+
+8.<value> instanceof <type>
+
+9.db.collection.updateMany()
+
+10.db.collection.updateOne()
+
+11.db.collection.save()
+
+12.db.collection.deleteOne()
+
+13.db.collection.deleteMany()
+
+14.db.collection.drop()
+
+15.db.collection.createIndex()
