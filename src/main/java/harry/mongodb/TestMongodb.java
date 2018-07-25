@@ -21,8 +21,7 @@ public class TestMongodb {
 	@Test
 	public void testConnction() {
 		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
-			MongoIterable<String> listDatabaseNames = mongoClient.listDatabaseNames();
-			for (String dbName : listDatabaseNames) {
+			for (String dbName : mongoClient.listDatabaseNames()) {
 				System.out.println(dbName);
 			}
 		}
@@ -31,8 +30,7 @@ public class TestMongodb {
 	@Test
 	public void testCreate() {
 		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
-			MongoDatabase database = mongoClient.getDatabase("test");
-			MongoCollection<Document> collection = database.getCollection("test");
+			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			Document document = new Document("name", "MongoDB").append("type", "db").append("count", 1)
 					.append("versions", Arrays.asList("v3.2", "v3.0", "v2.6"))
 					.append("info", new Document("x", 203).append("y", 102));
@@ -43,8 +41,7 @@ public class TestMongodb {
 	@Test
 	public void testQuery() {
 		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
-			MongoDatabase database = mongoClient.getDatabase("test");
-			MongoCollection<Document> collection = database.getCollection("test");
+			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			System.out.println(collection.count());
 			for (Document document : collection.find()) {
 				System.out.println(document.toJson());
@@ -59,8 +56,7 @@ public class TestMongodb {
 	@Test
 	public void testUpdate(){
 		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
-			MongoDatabase database = mongoClient.getDatabase("test");
-			MongoCollection<Document> collection = database.getCollection("test");
+			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			collection.updateOne(eq("name", "test"), new Document("$set", new Document("name", "redis")));
 		}
 	}
@@ -68,8 +64,7 @@ public class TestMongodb {
 	@Test
 	public void testDelete(){
 		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
-			MongoDatabase database = mongoClient.getDatabase("test");
-			MongoCollection<Document> collection = database.getCollection("test");
+			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			collection.deleteOne(eq("name", "redis"));
 		}
 	}
