@@ -22,7 +22,7 @@ import com.mongodb.client.MongoIterable;
 public class TestMongodb {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TestMongodb.class);
 	
-	private static final String HOST = "192.168.0.116";
+	private static final String HOST = "127.0.0.1";
 	private static final int PORT = 27017;
 	
 	@Test
@@ -48,15 +48,15 @@ public class TestMongodb {
 	@Test
 	public void testQuery() {
 		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
-			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
+			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("customer");
 			System.out.println(collection.count());
 			for (Document document : collection.find()) {
 				LOGGER.info(document.toJson());
 			}
 			
-			LOGGER.info("----------------------------------");
+			/*LOGGER.info("----------------------------------");
 			Document document = collection.find(eq("name","MongoDB")).first();
-			LOGGER.info(document.toJson());
+			LOGGER.info(document.toJson());*/
 		}
 	}
 	
