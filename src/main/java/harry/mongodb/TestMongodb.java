@@ -18,9 +18,12 @@ import com.mongodb.client.MongoIterable;
  *
  */
 public class TestMongodb {
+	private static final String HOST = "192.168.0.116";
+	private static final int PORT = 27017;
+	
 	@Test
 	public void testConnction() {
-		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
+		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
 			for (String dbName : mongoClient.listDatabaseNames()) {
 				System.out.println(dbName);
 			}
@@ -29,7 +32,7 @@ public class TestMongodb {
 
 	@Test
 	public void testCreate() {
-		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
+		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
 			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			Document document = new Document("name", "MongoDB").append("type", "db").append("count", 1)
 					.append("versions", Arrays.asList("v3.2", "v3.0", "v2.6"))
@@ -40,7 +43,7 @@ public class TestMongodb {
 
 	@Test
 	public void testQuery() {
-		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
+		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
 			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			System.out.println(collection.count());
 			for (Document document : collection.find()) {
@@ -55,7 +58,7 @@ public class TestMongodb {
 	
 	@Test
 	public void testUpdate(){
-		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
+		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
 			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			collection.updateOne(eq("name", "test"), new Document("$set", new Document("name", "redis")));
 		}
@@ -63,7 +66,7 @@ public class TestMongodb {
 	
 	@Test
 	public void testDelete(){
-		try(MongoClient mongoClient = new MongoClient("192.168.0.116", 27017);){
+		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
 			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			collection.deleteOne(eq("name", "redis"));
 		}
