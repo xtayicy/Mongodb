@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import org.bson.Document;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -18,6 +20,8 @@ import com.mongodb.client.MongoIterable;
  *
  */
 public class TestMongodb {
+	private static final Logger LOGGER = LoggerFactory.getLogger(TestMongodb.class);
+	
 	private static final String HOST = "192.168.0.116";
 	private static final int PORT = 27017;
 	
@@ -25,7 +29,7 @@ public class TestMongodb {
 	public void testConnction() {
 		try(MongoClient mongoClient = new MongoClient(HOST, PORT);){
 			for (String dbName : mongoClient.listDatabaseNames()) {
-				System.out.println(dbName);
+				LOGGER.info(dbName);
 			}
 		}
 	}
@@ -47,12 +51,12 @@ public class TestMongodb {
 			MongoCollection<Document> collection = mongoClient.getDatabase("test").getCollection("test");
 			System.out.println(collection.count());
 			for (Document document : collection.find()) {
-				System.out.println(document.toJson());
+				LOGGER.info(document.toJson());
 			}
 			
-			System.out.println("----------------------------------");
-			Document first = collection.find(eq("name","MongoDB")).first();
-			System.out.println(first.toJson());
+			LOGGER.info("----------------------------------");
+			Document document = collection.find(eq("name","MongoDB")).first();
+			LOGGER.info(document.toJson());
 		}
 	}
 	
