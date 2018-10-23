@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
 
 /**
  * 
@@ -54,9 +52,11 @@ public class TestMongodb {
 				LOGGER.info(document.toJson());
 			}
 			
-			/*LOGGER.info("----------------------------------");
+			/*
+			LOGGER.info("----------------------------------");
 			Document document = collection.find(eq("name","MongoDB")).first();
-			LOGGER.info(document.toJson());*/
+			LOGGER.info(document.toJson());
+			*/
 		}
 	}
 	
